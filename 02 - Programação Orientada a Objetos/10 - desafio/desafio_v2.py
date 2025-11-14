@@ -68,16 +68,16 @@ class Conta:
             return True
 
         else:
-            print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
+            print("\n Operação falhou! O valor informado é inválido. ")
 
         return False
 
     def depositar(self, valor):
         if valor > 0:
             self._saldo += valor
-            print("\n=== Depósito realizado com sucesso! ===")
+            print("\n Depósito realizado com sucesso!")
         else:
-            print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
+            print("\n Operação falhou! O valor informado é inválido.")
             return False
 
         return True
@@ -98,10 +98,10 @@ class ContaCorrente(Conta):
         excedeu_saques = numero_saques >= self._limite_saques
 
         if excedeu_limite:
-            print("\n@@@ Operação falhou! O valor do saque excede o limite. @@@")
+            print("\n Operação falhou! O valor do saque excede o limite. ")
 
         elif excedeu_saques:
-            print("\n@@@ Operação falhou! Número máximo de saques excedido. @@@")
+            print("\n Operação falhou! Número máximo de saques excedido. ")
 
         else:
             return super().sacar(valor)
@@ -196,7 +196,7 @@ def filtrar_cliente(cpf, clientes):
 
 def recuperar_conta_cliente(cliente):
     if not cliente.contas:
-        print("\n@@@ Cliente não possui conta! @@@")
+        print("\n Cliente não possui conta! ")
         return
 
     # FIXME: não permite cliente escolher a conta
@@ -208,7 +208,7 @@ def depositar(clientes):
     cliente = filtrar_cliente(cpf, clientes)
 
     if not cliente:
-        print("\n@@@ Cliente não encontrado! @@@")
+        print("\n Cliente não encontrado! ")
         return
 
     valor = float(input("Informe o valor do depósito: "))
@@ -226,7 +226,7 @@ def sacar(clientes):
     cliente = filtrar_cliente(cpf, clientes)
 
     if not cliente:
-        print("\n@@@ Cliente não encontrado! @@@")
+        print("\n Cliente não encontrado! ")
         return
 
     valor = float(input("Informe o valor do saque: "))
@@ -244,7 +244,7 @@ def exibir_extrato(clientes):
     cliente = filtrar_cliente(cpf, clientes)
 
     if not cliente:
-        print("\n@@@ Cliente não encontrado! @@@")
+        print("\n Cliente não encontrado! ")
         return
 
     conta = recuperar_conta_cliente(cliente)
@@ -263,15 +263,13 @@ def exibir_extrato(clientes):
 
     print(extrato)
     print(f"\nSaldo:\n\tR$ {conta.saldo:.2f}")
-    print("==========================================")
-
 
 def criar_cliente(clientes):
     cpf = input("Informe o CPF (somente número): ")
     cliente = filtrar_cliente(cpf, clientes)
 
     if cliente:
-        print("\n@@@ Já existe cliente com esse CPF! @@@")
+        print("\nJá existe cliente com esse CPF!")
         return
 
     nome = input("Informe o nome completo: ")
@@ -290,14 +288,14 @@ def criar_conta(numero_conta, clientes, contas):
     cliente = filtrar_cliente(cpf, clientes)
 
     if not cliente:
-        print("\n@@@ Cliente não encontrado, fluxo de criação de conta encerrado! @@@")
+        print("\n Cliente não encontrado, fluxo de criação de conta encerrado!")
         return
 
     conta = ContaCorrente.nova_conta(cliente=cliente, numero=numero_conta)
     contas.append(conta)
     cliente.contas.append(conta)
 
-    print("\n=== Conta criada com sucesso! ===")
+    print("\n Conta criada com sucesso!")
 
 
 def listar_contas(contas):
@@ -336,7 +334,7 @@ def main():
             break
 
         else:
-            print("\n@@@ Operação inválida, por favor selecione novamente a operação desejada. @@@")
+            print("\n Operação inválida, por favor selecione novamente a operação desejada. ")
 
 
 main()
